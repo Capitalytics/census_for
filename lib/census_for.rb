@@ -1,23 +1,36 @@
+require 'pry'
+require 'smarter_csv'
 class CensusFor
-  module ImportData
-    def get_csv_data
-      binding.pry
-      result = SmarterCSV.process("data/2014-census-data.csv")
-      result
+
+ VERSION = "0.1.0"
+
+  class CensusData
+    def self.data
+      @@data ||= load_data
+    end
+
+    def self.load_data
+      SmarterCSV.process("data/2014-census-data.csv")
     end
   end
 
   class County
-    include ImportData
-    def population(county_and_state_abbrev)
-      get_csv_data
+    def full_state_from_abbrev(state)
+      "Alabama"
+    end
+    def population(county:, state:)
+
+      result = CensusData.data.find {|x| x[:"geo.display_label"] == "#{county} County, #{state}"}
+      if result
+        result[:respop72014]
+      else
+        "not found"
+      end
     end
   end
 
   class State
-    include ImportData
     def population(state_abbrev)
-      get_csv_data
     end
   end
 end
