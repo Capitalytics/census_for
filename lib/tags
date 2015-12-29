@@ -1,6 +1,8 @@
 !_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
-CensusFor	/Users/evankoch/code/census_for/lib/census_for.rb	/^module CensusFor$/;"	m	language:Ruby
+CensusFor	/Users/evankoch/code/census_for/lib/census_for.rb	/^class CensusFor$/;"	c	language:Ruby
 County	/Users/evankoch/code/census_for/lib/census_for.rb	/^  class County$/;"	c	language:Ruby	class:CensusFor
+get_csv_data	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def get_csv_data$/;"	f	language:Ruby	class:CensusFor.ImportData
+ImportData	/Users/evankoch/code/census_for/lib/census_for.rb	/^  module ImportData$/;"	m	language:Ruby	class:CensusFor
 population	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def population(county_and_state_abbrev)$/;"	f	language:Ruby	class:CensusFor.County
 population	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def population(state_abbrev)$/;"	f	language:Ruby	class:CensusFor.State
 State	/Users/evankoch/code/census_for/lib/census_for.rb	/^  class State$/;"	c	language:Ruby	class:CensusFor
