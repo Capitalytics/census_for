@@ -14,7 +14,6 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.files         = ["lib/census_for.rb",
-                        "lib/census_for/parser.rb",
                          "data/2014-census-data.csv"
                        ]
   spec.bindir        = "exe"
