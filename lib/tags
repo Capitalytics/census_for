@@ -8,4 +8,7 @@ data	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def self.data$/;"	F
 load_data	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def self.load_data$/;"	F	language:Ruby	class:CensusFor.CensusData
 parse_county_state	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def self.parse_county_state(county_state)$/;"	F	language:Ruby	class:CensusFor.County
 population	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def self.population(request)$/;"	F	language:Ruby	class:CensusFor.County
+population	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def self.population(request)$/;"	F	language:Ruby	class:CensusFor.State
 population_lookup	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def self.population_lookup(county_state)$/;"	F	language:Ruby	class:CensusFor.County
+population_lookup	/Users/evankoch/code/census_for/lib/census_for.rb	/^    def self.population_lookup(state)$/;"	F	language:Ruby	class:CensusFor.State
+State	/Users/evankoch/code/census_for/lib/census_for.rb	/^  class State$/;"	c	language:Ruby	class:CensusFor

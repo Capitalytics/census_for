@@ -43,7 +43,6 @@ class CensusFor
   end
 
   class County
-
     def self.population(request)
       parsed_request = parse_county_state(request)
       return population_lookup(parsed_request)
@@ -68,10 +67,31 @@ class CensusFor
     end
   end
 
+  class State
+    def self.population(request)
+      state = Abbrev.converter(request)
+      return population_lookup(state)
+    end
+
+    def self.population_lookup(state)
+      counties_in_state = []
+
+      CensusData.data.each do |x|
+        counties_in_state << x if x[:"geo.display_label"].split(/\s*,\s*/).last == "#{state}"
+      end
+
+      counties_pop_total = 0
+
+      counties_in_state.each do |c|
+        counties_pop_total += c[:respop72014]
+      end
+      counties_pop_total
+    end
+  end
   class Abbrev
     def self.converter(abbrev)
-      if STATES.has_value?(abbrev.capitalize)
-        return abbrev.capitalize
+      if STATES.has_value?(abbrev.split.map(&:capitalize).join(' '))
+        return abbrev.split.map(&:capitalize).join(' ')
       elsif STATES.has_key?(abbrev.upcase.to_sym)
         return STATES[abbrev.upcase.to_sym]
       else return "not found"
