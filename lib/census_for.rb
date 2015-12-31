@@ -6,7 +6,7 @@ class CensusFor
 
   STATES =
     {
-     "AK": "Alaska", "AL": "Alabama", AR: "Arkansas", AZ: "Arizona",
+     "ak": "alaska", "al": "Alabama", AR: "Arkansas", AZ: "Arizona",
      AS: "American Samoa",
      CA: "California", CO: "Colorado", CT: "Connecticut",
      DC: "District of Columbia",
@@ -18,7 +18,7 @@ class CensusFor
      IA: "Iowa", ID: "Idaho", IL: "Illinois", IN: "Indiana",
      KS: "Kansas", KY: "Kentucky",
      LA: "Louisiana",
-     MA: "Massachusetts", MD: "Maryland", ME: "Maine", MI: "Michigan", MN: "Minnesota", MO: "Missouri", MS: "Mississippi", MT: "Montana",
+     MA: "Massachusetts", MD: "Maryland", ME: "Maine", MI: "Michigan", mn: "minnesota", MO: "Missouri", MS: "Mississippi", MT: "Montana",
      NC: "North Carolina", ND: "North Dakota", NE: "Nebraska", NH: "New Hampshire", NJ: "New Jersey", NM: "New Mexico", NV: "Nevada", NY: "New York",
      OH: "Ohio", OK: "Oklahoma", OR: "Oregon",
      PA: "Pennsylvania",
@@ -48,13 +48,26 @@ class CensusFor
     end
 
     def self.parse_county_state(county_state)
-      temp = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"]
-      binding.pry
+      transit = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"]
+      if transit.size >= 3
+        result = 
+        1.upto(transit.size) do |x|
+          y = transit.size
+          first = transit.take(x).join(' ')
+          second = transit.last(y-x).join(' ')
+          result << [first, second].flatten
+          binding.pry
+        end
+        return result
+      else
+        return transit
+      end
     end
 
     def self.population_lookup(county_state)
       county_name = county_state.first
       state_name = county_state.last
+      binding.pry
       state = Abbrev.converter(state_name)
       result = CensusData.data.find { |x| x[:"geo.display_label"] == 
           "#{county_name.capitalize} County, #{state.capitalize}" || x[:"geo.display_label"] == "#{county_name.capitalize} Parish, Louisiana" }
@@ -90,6 +103,7 @@ class CensusFor
 
   class Abbrev
     def self.converter(abbrev)
+      binding.pry
       if STATES.has_value?(abbrev.split.map(&:capitalize).join(' '))
         return abbrev.split.map(&:capitalize).join(' ')
       elsif STATES.has_key?(abbrev.upcase.to_sym)

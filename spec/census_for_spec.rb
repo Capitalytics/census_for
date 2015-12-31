@@ -22,6 +22,7 @@ context "CensusFor" do
         expect(CensusFor::County.population("Travis, Texas")).to eq 1151145
       end
       it "calculates correctly given counties/states with > 1 name" do
+        expect(CensusFor::County.population("Blue Earth, MN")).to eq 200111
         expect(CensusFor::County.population("Kent, Rhode Island")).to eq 200111
         expect(CensusFor::County.population("Blue Earth, MN")).to eq 200111
         expect(CensusFor::County.population("East Baton Rouge Parish, LA")).to eq 1151145
@@ -34,10 +35,16 @@ context "CensusFor" do
         expect(CensusFor::County.population("Baldwin, al")).to eq 200111
         expect(CensusFor::County.population("Tangipahoa, LA")).to eq 127049
       end
-      it "calculates correctly when 'county' included in county name" do
+      it "calculates correctly when 'county'/'parish' included in county name" do
         expect(CensusFor::County.population("baldwin county AL")).to eq 200111
         expect(CensusFor::County.population("Clarke County, georgia")).to eq 120938
         expect(CensusFor::County.population("Tangipahoa Parish, LA")).to eq 127049
+      end
+      it "calculates correctly with capitals in county name, eg. DeKalb" do
+        expect(CensusFor::County.population("DeKalb, GA")).to eq 722161
+      end
+      it "returns 'Not Found' with non-county request" do
+        expect(CensusFor::County.population("Awesome County, TX")).to eq "not found"
       end
 
       pending "need dataset and code additions for municipalities in PR" do
@@ -50,7 +57,7 @@ context "CensusFor" do
     end
   end
 
-  describe CensusFor::County do
+  describe CensusFor::State do
     describe "population" do
       it "calculates correctly, given full state name" do
         expect(CensusFor::State.population("Wyoming")).to eq 584153
