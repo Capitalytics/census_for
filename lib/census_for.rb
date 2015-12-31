@@ -32,7 +32,6 @@ class CensusFor
     }
 
   class CensusData
-
     def self.data
       @@data ||= load_data
     end
@@ -49,7 +48,8 @@ class CensusFor
     end
 
     def self.parse_county_state(county_state)
-      county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"]
+      temp = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"]
+      binding.pry
     end
 
     def self.population_lookup(county_state)
@@ -81,13 +81,13 @@ class CensusFor
       end
 
       counties_pop_total = 0
-
       counties_in_state.each do |c|
         counties_pop_total += c[:respop72014]
       end
       counties_pop_total
     end
   end
+
   class Abbrev
     def self.converter(abbrev)
       if STATES.has_value?(abbrev.split.map(&:capitalize).join(' '))
