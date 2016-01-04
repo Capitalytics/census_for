@@ -22,11 +22,11 @@ context "CensusFor" do
         expect(CensusFor::County.population("Travis, Texas")).to eq 1151145
       end
       it "calculates correctly given counties/states with > 1 name" do
-        expect(CensusFor::County.population("Blue Earth, MN")).to eq 200111
-        expect(CensusFor::County.population("Kent, Rhode Island")).to eq 200111
-        expect(CensusFor::County.population("Blue Earth, MN")).to eq 200111
-        expect(CensusFor::County.population("East Baton Rouge Parish, LA")).to eq 1151145
-        expect(CensusFor::County.population("New York County, New York")).to eq 200111
+        expect(CensusFor::County.population("Blue Earth, MN")).to eq 65385
+        expect(CensusFor::County.population("Kent, Rhode Island")).to eq 165128
+        expect(CensusFor::County.population("Blue Uuuurrth, MN")).to eq "not found"
+        expect(CensusFor::County.population("East Baton Rouge Parish, LA")).to eq 446042
+        expect(CensusFor::County.population("New York County, New York")).to eq 1636268
       end
       it "calculates correctly given parish, for Louisiana" do
         expect(CensusFor::County.population("tangipahoa Parish, Louisiana")).to eq 127049

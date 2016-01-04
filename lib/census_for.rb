@@ -6,29 +6,29 @@ class CensusFor
 
   STATES =
     {
-     "ak": "alaska", "al": "Alabama", AR: "Arkansas", AZ: "Arizona",
-     AS: "American Samoa",
-     CA: "California", CO: "Colorado", CT: "Connecticut",
-     DC: "District of Columbia",
-     DE: "Delaware",
-     FL: "Florida",
-     GA: "Georgia",
-     GU: "Guam",
-     HI: "Hawaii",
-     IA: "Iowa", ID: "Idaho", IL: "Illinois", IN: "Indiana",
-     KS: "Kansas", KY: "Kentucky",
-     LA: "Louisiana",
-     MA: "Massachusetts", MD: "Maryland", ME: "Maine", MI: "Michigan", mn: "minnesota", MO: "Missouri", MS: "Mississippi", MT: "Montana",
-     NC: "North Carolina", ND: "North Dakota", NE: "Nebraska", NH: "New Hampshire", NJ: "New Jersey", NM: "New Mexico", NV: "Nevada", NY: "New York",
-     OH: "Ohio", OK: "Oklahoma", OR: "Oregon",
-     PA: "Pennsylvania",
-     PR: "Puerto Rico",
-     RI: "Rhode Island",
-     SC: "South Carolina", SD: "South Dakota", TN: "Tennessee", TX: "Texas",
-     UT: "Utah",
-     VA: "Virginia", VT: "Vermont",
-     VI: "Virgin Islands",
-     WA: "Washington", WI: "Wisconsin", WV: "West Virginia", WY: "Wyoming"
+     ak: "alaska", al: "alabama", ar: "arkansas", az: "arizona",
+     as: "american samoa",
+     ca: "california", co: "colorado", ct: "connecticut",
+     dc: "district of columbia",
+     de: "delaware",
+     fl: "florida",
+     ga: "georgia",
+     gu: "guam",
+     hi: "hawaii",
+     ia: "iowa", id: "idaho", il: "illinois", in: "indiana",
+     ks: "kansas", ky: "kentucky",
+     la: "louisiana",
+     ma: "massachusetts", md: "maryland", me: "maine", mi: "michigan", mn: "minnesota", mo: "missouri", ms: "mississippi", mt: "montana",
+     nc: "north carolina", nd: "north dakota", ne: "nebraska", nh: "new hampshire", nj: "new jersey", nm: "new mexico", nv: "nevada", ny: "new york",
+     oh: "ohio", ok: "oklahoma", or: "oregon",
+     pa: "pennsylvania",
+     pr: "puerto rico",
+     ri: "rhode island",
+     sc: "south carolina", sd: "south dakota", tn: "tennessee", tx: "texas",
+     ut: "utah",
+     va: "virginia", vt: "vermont",
+     vi: "virgin islands",
+     wa: "washingington", wi: "wisconsin", wv: "west virginia", wy: "wyoming"
     }
 
   class CensusData
@@ -50,33 +50,31 @@ class CensusFor
     def self.parse_county_state(county_state)
       transit = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"]
       if transit.size >= 3
-        result = 
+        result = []
         1.upto(transit.size) do |x|
           y = transit.size
           first = transit.take(x).join(' ')
           second = transit.last(y-x).join(' ')
           result << [first, second].flatten
-          binding.pry
         end
         return result
       else
-        return transit
+        return [transit]
       end
     end
 
     def self.population_lookup(county_state)
-      county_name = county_state.first
-      state_name = county_state.last
-      binding.pry
-      state = Abbrev.converter(state_name)
-      result = CensusData.data.find { |x| x[:"geo.display_label"] == 
-          "#{county_name.capitalize} County, #{state.capitalize}" || x[:"geo.display_label"] == "#{county_name.capitalize} Parish, Louisiana" }
-
-      if result
-        result[:respop72014]
-      else
-        "not found"
+      county_state.each do |cs|
+        county_name = cs.first
+        state_name = cs.last
+        state = Abbrev.converter(state_name)
+        result = CensusData.data.find { |x| x[:"geo.display_label"] == 
+            "#{county_name.split.map(&:capitalize).join(' ')} County, #{state}" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Parish, Louisiana" }
+        if result
+          return result[:respop72014]
+        end
       end
+      return "not found" #preceding each loop matched nothing from query 
     end
   end
 
@@ -103,11 +101,10 @@ class CensusFor
 
   class Abbrev
     def self.converter(abbrev)
-      binding.pry
-      if STATES.has_value?(abbrev.split.map(&:capitalize).join(' '))
+      if STATES.has_value?(abbrev.downcase)
         return abbrev.split.map(&:capitalize).join(' ')
-      elsif STATES.has_key?(abbrev.upcase.to_sym)
-        return STATES[abbrev.upcase.to_sym]
+      elsif STATES.has_key?(abbrev.to_sym)
+        return STATES[abbrev.to_sym].capitalize
       else return "not found"
       end
     end
