@@ -1,4 +1,5 @@
 GEO.id,GEO.id2,GEO.display-label,rescen42010,resbase42010,respop72010,respop72011,respop72012,respop72013,respop72014
+Id,Id2,Geography,"April 1, 2010 - Census","April 1, 2010 - Estimates Base",Population Estimate (as of July 1) - 2010,Population Estimate (as of July 1) - 2011,Population Estimate (as of July 1) - 2012,Population Estimate (as of July 1) - 2013,Population Estimate (as of July 1) - 2014
 0500000US01001,1001,"Autauga County, Alabama",54571,54571,54684,55275,55192,55136,55395
 0500000US01003,1003,"Baldwin County, Alabama",182265,182265,183216,186694,190561,195443,200111
 0500000US01005,1005,"Barbour County, Alabama",27457,27457,27336,27225,27169,26978,26887
@@ -3141,81 +3142,4 @@ GEO.id,GEO.id2,GEO.display-label,rescen42010,resbase42010,respop72010,respop7201
 0500000US56041,56041,"Uinta County, Wyoming",21118,21118,21103,20917,20989,21031,20904
 0500000US56043,56043,"Washakie County, Wyoming",8533,8533,8541,8466,8441,8450,8322
 0500000US56045,56045,"Weston County, Wyoming",7208,7208,7169,7102,7051,7154,7201
-,,"Adjuntas Municipio, Puerto Rico",19483,19483,19473,19345,19170,19052,18900
-,,"Aguada Municipio, Puerto Rico",41959,41959,41917,41656,41221,40759,40329
-,,"Aguadilla Municipio, Puerto Rico",60949,60949,60788,60088,59067,58106,57290
-,,"Aguas Buenas Municipio, Puerto Rico",28659,28659,28654,28390,28098,27799,27473
-,,"Aibonito Municipio, Puerto Rico",25900,25900,25878,25597,25265,24903,24561
-,,"Añasco Municipio, Puerto Rico",29261,29261,29271,29154,28909,28635,28403
-,,"Arecibo Municipio, Puerto Rico",96440,96440,96263,95139,93954,92951,91540
-,,"Arroyo Municipio, Puerto Rico",19575,19575,19572,19477,19288,19084,18853
-,,"Barceloneta Municipio, Puerto Rico",24816,24816,24827,24868,24950,24938,24958
-,,"Barranquitas Municipio, Puerto Rico",30318,30318,30324,30252,30073,29880,29697
-,,"Bayamón Municipio, Puerto Rico",208116,208105,207644,205090,201608,197813,194210
-,,"Cabo Rojo Municipio, Puerto Rico",50917,50917,50963,50904,50747,50569,50349
-,,"Caguas Municipio, Puerto Rico",142893,142917,142854,141796,140390,138760,137032
-,,"Camuy Municipio, Puerto Rico",35159,35159,35122,34849,34471,34084,33664
-,,"Canóvanas Municipio, Puerto Rico",47648,47648,47694,47773,47762,47589,47457
-,,"Carolina Municipio, Puerto Rico",176762,176762,176420,174226,171474,168611,165820
-,,"Cataño Municipio, Puerto Rico",28140,28140,28077,27694,27235,26777,26274
-,,"Cayey Municipio, Puerto Rico",48119,48119,48115,47763,47306,46783,46293
-,,"Ceiba Municipio, Puerto Rico",13631,13631,13611,13390,13122,12878,12607
-,,"Ciales Municipio, Puerto Rico",18782,18782,18753,18505,18243,17979,17728
-,,"Cidra Municipio, Puerto Rico",43480,43480,43477,43245,42971,42579,42118
-,,"Coamo Municipio, Puerto Rico",40512,40512,40568,40643,40528,40409,40331
-,,"Comerío Municipio, Puerto Rico",20778,20778,20796,20683,20536,20396,20253
-,,"Corozal Municipio, Puerto Rico",37142,37142,37134,36874,36514,36098,35693
-,,"Culebra Municipio, Puerto Rico",1818,1818,1820,1814,1815,1817,1818
-,,"Dorado Municipio, Puerto Rico",38165,38165,38237,38369,38342,38314,38264
-,,"Fajardo Municipio, Puerto Rico",36993,36993,36880,36308,35593,34864,34049
-,,"Florida Municipio, Puerto Rico",12680,12680,12688,12618,12603,12504,12411
-,,"Guánica Municipio, Puerto Rico",19427,19427,19376,19006,18653,18246,17852
-,,"Guayama Municipio, Puerto Rico",45362,45362,45277,44532,44077,43953,43467
-,,"Guayanilla Municipio, Puerto Rico",21581,21581,21525,21226,20881,20528,20148
-,,"Guaynabo Municipio, Puerto Rico",97924,97924,97788,96811,95536,94207,92799
-,,"Gurabo Municipio, Puerto Rico",45369,45373,45555,46149,46553,46899,47145
-,,"Hatillo Municipio, Puerto Rico",41953,41953,41969,41983,41846,41734,41618
-,,"Hormigueros Municipio, Puerto Rico",17250,17250,17247,17188,17051,16885,16746
-,,"Humacao Municipio, Puerto Rico",58466,58466,58370,57891,57221,56537,55884
-,,"Isabela Municipio, Puerto Rico",45631,45655,45657,45424,45014,44581,44149
-,,"Jayuya Municipio, Puerto Rico",16642,16642,16638,16449,16197,15936,15693
-,,"Juana Díaz Municipio, Puerto Rico",50747,50747,50739,50432,49946,49410,48853
-,,"Juncos Municipio, Puerto Rico",40290,40290,40344,40379,40321,40275,40102
-,,"Lajas Municipio, Puerto Rico",25753,25753,25707,25439,25169,24803,24465
-,,"Lares Municipio, Puerto Rico",30753,30753,30629,30064,29423,28805,28208
-,,"Las Marías Municipio, Puerto Rico",9881,9881,9870,9699,9524,9353,9158
-,,"Las Piedras Municipio, Puerto Rico",38675,38675,38719,38861,38808,38734,38671
-,,"Loíza Municipio, Puerto Rico",30060,30060,30016,29579,29057,28551,28065
-,,"Luquillo Municipio, Puerto Rico",20068,20068,20056,19948,19771,19542,19338
-,,"Manatí Municipio, Puerto Rico",44113,44113,44039,43550,42939,42299,41675
-,,"Maricao Municipio, Puerto Rico",6276,6276,6278,6226,6146,6090,6022
-,,"Maunabo Municipio, Puerto Rico",12225,12225,12215,12074,11919,11746,11565
-,,"Mayagüez Municipio, Puerto Rico",89080,89080,88786,87231,85465,83726,81915
-,,"Moca Municipio, Puerto Rico",40109,40109,40104,39823,39413,38946,38461
-,,"Morovis Municipio, Puerto Rico",32610,32610,32649,32652,32544,32379,32194
-,,"Naguabo Municipio, Puerto Rico",26720,26720,26772,26904,26925,26917,26886
-,,"Naranjito Municipio, Puerto Rico",30402,30402,30384,30250,30083,29851,29602
-,,"Orocovis Municipio, Puerto Rico",23423,23423,23426,23214,22936,22668,22392
-,,"Patillas Municipio, Puerto Rico",19277,19277,19258,19036,18769,18506,18261
-,,"Peñuelas Municipio, Puerto Rico",24282,24282,24219,23815,23317,22821,22365
-,,"Ponce Municipio, Puerto Rico",166327,166327,165714,162977,159613,156456,153540
-,,"Quebradillas Municipio, Puerto Rico",25919,25919,25899,25758,25550,25310,25042
-,,"Rincón Municipio, Puerto Rico",15200,15200,15199,15121,15009,14879,14782
-,,"Río Grande Municipio, Puerto Rico",54304,54319,54298,53993,53807,53374,52668
-,,"Sabana Grande Municipio, Puerto Rico",25265,25265,25250,25007,24680,24402,24121
-,,"Salinas Municipio, Puerto Rico",31078,31078,31046,30864,30507,30233,29881
-,,"San Germán Municipio, Puerto Rico",35527,35691,35629,35272,34803,34194,33725
-,,"San Juan Municipio, Puerto Rico",395326,395487,394234,387740,380380,372815,365575
-,,"San Lorenzo Municipio, Puerto Rico",41058,41034,41020,40721,40348,39954,39524
-,,"San Sebastián Municipio, Puerto Rico",42430,42430,42337,41836,41255,40622,39969
-,,"Santa Isabel Municipio, Puerto Rico",23274,23274,23289,23255,23144,23023,22860
-,,"Toa Alta Municipio, Puerto Rico",74066,74070,74278,74691,74802,74833,74837
-,,"Toa Baja Municipio, Puerto Rico",89609,89616,89465,88278,86912,85546,84165
-,,"Trujillo Alto Municipio, Puerto Rico",74842,74842,74757,74047,73147,72179,71019
-,,"Utuado Municipio, Puerto Rico",33149,33149,33056,32639,32102,31582,31050
-,,"Vega Alta Municipio, Puerto Rico",39951,39951,39951,39915,39721,39526,39236
-,,"Vega Baja Municipio, Puerto Rico",59662,59662,59554,58795,57960,57102,56166
-,,"Vieques Municipio, Puerto Rico",9301,9301,9306,9255,9237,9172,9113
-,,"Villalba Municipio, Puerto Rico",26073,26073,26007,25604,25201,24777,24389
-,,"Yabucoa Municipio, Puerto Rico",37941,37941,37880,37442,36919,36397,35879
-,,"Yauco Municipio, Puerto Rico",42043,42043,41926,41216,40425,39604,38782
+0500000US56046,56045,"All County, Puerto Rico",,3725789,3726157,3721527,3686771,3642281,3548397

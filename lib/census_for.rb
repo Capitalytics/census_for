@@ -76,6 +76,17 @@ class CensusFor
       end
       return "not found" #preceding each loop matched nothing from query 
     end
+
+    def self.coeff(county_state)
+      coefficient = (population(county_state) * 1000 / highest_county_pop).to_f
+      coefficient < 1 ? 1 : coefficient
+    end
+
+    def self.highest_county_pop
+      most_populous_county = CensusData.data.max_by { |x| x[:respop72014] }
+      most_populous_county[:respop72014]
+        #for 2014, this is Los Angeles County, CA: pop 10,116,705
+    end
   end
 
   class State

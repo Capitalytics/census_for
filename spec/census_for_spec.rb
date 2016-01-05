@@ -46,7 +46,8 @@ context "CensusFor" do
       it "returns 'Not Found' with non-county request" do
         expect(CensusFor::County.population("Awesome County, TX")).to eq "not found"
       end
-
+      
+      #modified census data to add PR "state" = territory, but no county info
       pending "need dataset and code additions for municipalities in PR" do
         it "calculates correctly, given municipalities in Puerto Rico" do
           expect(CensusFor::County.population("Ponce, PR")).to eq 166327
@@ -71,6 +72,19 @@ context "CensusFor" do
         expect(CensusFor::State.population("north dakota")).to eq 739482
         expect(CensusFor::State.population("puerto Rico")).to eq 3548397
         expect(CensusFor::State.population("NORTH DAKOTA")).to eq 739482
+      end
+    end
+  end
+
+  describe CensusFor::County do
+    describe "coeff" do
+      #least populous US county has coefficient of 1.0; most populous county has 100.0
+      it "calculates population coefficient, given county name" do
+        expect(CensusFor::County.coeff("Los Angeles County, CA")).to eq 1000
+        expect(CensusFor::County.coeff("Loving County, TX")).to eq 1
+        expect(CensusFor::County.coeff("East Baton Rouge Parish, Louisiana")).to eq 44
+        expect(CensusFor::County.coeff("Fulton, Georgia")).to eq 98
+        expect(CensusFor::County.coeff("Clarke, GA")).to eq 11
       end
     end
   end
