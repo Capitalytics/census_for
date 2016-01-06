@@ -1,5 +1,3 @@
-require 'pry'
-require 'smarter_csv'
 class CensusFor
 
   VERSION = "0.1.0"
