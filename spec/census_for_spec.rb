@@ -1,5 +1,6 @@
 require 'pry'
 require 'smarter_csv'
+require 'spec_helper'
 
 describe CensusFor do
   it 'has a version number' do

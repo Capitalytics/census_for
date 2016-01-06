@@ -51,7 +51,7 @@ class CensusFor
       transit = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"] - ["municipio"] - ["municipality"]
       if transit.size >= 3
         result = []
-        1.upto(transit.size) do |x|
+        1.upto((transit.size - 1)) do |x|
           y = transit.size
           first = transit.take(x).join(' ')
           second = transit.last(y-x).join(' ')
