@@ -51,12 +51,12 @@ For your own US County metrics, I have also included a coefficient calculator to
 
 For quick _Coeff_ retrieval:
 
-    CensusFor::State.population("AnyState")
+    CensusFor::State.coeff("AnyCounty, AnyState")
 
 Example:
 
-    CensusFor::County.coeff("Clarke County, GA")
-    CensusFor::County.population("clarke ga")
+    CensusFor::County.coeff("Clarke County, Georgia")
+    CensusFor::County.coeff("clarke ga")
 
 ## Contributing
 
