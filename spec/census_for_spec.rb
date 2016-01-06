@@ -53,6 +53,17 @@ context "CensusFor" do
         expect(CensusFor::County.population("San Sebastian Municipio, PR")).to eq 39969
       end
     end
+
+    describe "Coeff" do
+      #least populous US county has coefficient of 1.0; most populous county has 100.0
+      it "calculates population coefficient, given county name" do
+        expect(CensusFor::County.coeff("Los Angeles County, CA")).to eq 1000
+        expect(CensusFor::County.coeff("Loving County, TX")).to eq 1
+        expect(CensusFor::County.coeff("East Baton Rouge Parish, Louisiana")).to eq 44
+        expect(CensusFor::County.coeff("Fulton, Georgia")).to eq 98
+        expect(CensusFor::County.coeff("Clarke, GA")).to eq 11
+      end
+    end
   end
 
   describe CensusFor::State do
@@ -60,11 +71,13 @@ context "CensusFor" do
       it "calculates correctly, given full state name" do
         expect(CensusFor::State.population("Wyoming")).to eq 584153
         expect(CensusFor::State.population("North Dakota")).to eq 739482
+        expect(CensusFor::State.population("Awesome")).to eq 'not found'
       end
       it "calculates correctly, given state abbrev" do
         expect(CensusFor::State.population("WY")).to eq 584153
         expect(CensusFor::State.population("nd")).to eq 739482
         expect(CensusFor::State.population("PR")).to eq 3548397
+        expect(CensusFor::State.population("nz")).to eq 'not found'
       end
       it "calculates correctly, given 'Puerto Rico'" do
         expect(CensusFor::State.population("Puerto Rico")).to eq 3548397
@@ -74,19 +87,6 @@ context "CensusFor" do
         expect(CensusFor::State.population("north dakota")).to eq 739482
         expect(CensusFor::State.population("puerto Rico")).to eq 3548397
         expect(CensusFor::State.population("NORTH DAKOTA")).to eq 739482
-      end
-    end
-  end
-
-  describe CensusFor::County do
-    describe "Coeff" do
-      #least populous US county has coefficient of 1.0; most populous county has 100.0
-      it "calculates population coefficient, given county name" do
-        expect(CensusFor::County.coeff("Los Angeles County, CA")).to eq 1000
-        expect(CensusFor::County.coeff("Loving County, TX")).to eq 1
-        expect(CensusFor::County.coeff("East Baton Rouge Parish, Louisiana")).to eq 44
-        expect(CensusFor::County.coeff("Fulton, Georgia")).to eq 98
-        expect(CensusFor::County.coeff("Clarke, GA")).to eq 11
       end
     end
   end

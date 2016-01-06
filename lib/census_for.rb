@@ -68,7 +68,6 @@ class CensusFor
         county_name = cs.first
         state_name = cs.last
         state = Abbrev.converter(state_name)
-        binding.pry
         result = CensusData.data.find { |x| x[:"geo.display_label"] == 
             "#{county_name.split.map(&:capitalize).join(' ')} County, #{state}" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Parish, Louisiana" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Municipio, Puerto Rico" }
         if result
@@ -97,17 +96,20 @@ class CensusFor
     end
 
     def self.population_lookup(state)
-      counties_in_state = []
+      if state
+        counties_in_state = []
 
-      CensusData.data.each do |x|
-        counties_in_state << x if x[:"geo.display_label"].split(/\s*,\s*/).last == "#{state}"
-      end
+        CensusData.data.each do |x|
+          counties_in_state << x if x[:"geo.display_label"].split(/\s*,\s*/).last == "#{state}"
+        end
 
-      counties_pop_total = 0
-      counties_in_state.each do |c|
-        counties_pop_total += c[:respop72014]
+        counties_pop_total = 0
+        counties_in_state.each do |c|
+          counties_pop_total += c[:respop72014]
+        end
+        return counties_pop_total
+      else 'not found'
       end
-      counties_pop_total
     end
   end
 
@@ -117,7 +119,7 @@ class CensusFor
         return abbrev.split.map(&:capitalize).join(' ')
       elsif STATES.has_key?(abbrev.downcase.to_sym)
         return STATES[abbrev.downcase.to_sym].split.map(&:capitalize).join(' ')
-      else return "not found"
+      else return nil
       end
     end
   end
