@@ -1,8 +1,9 @@
-# CensusFor
+# CensusFor 
+v. 1.0
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/census_for`. To experiment with that code, run `bin/console` for an interactive prompt.
+*CensusFor* lets you quickly return **2014** US Census data for _States_ and _Counties_, including Puerto Rico municipios.
 
-TODO: Delete this and the text above, and describe your gem
+Additional feature is a _Scaled Ranking_ of US counties by population, with the vast majority of scaled coeffeicient 'rankings' falling between 1 and 99. (Scale is from 1: _least populous_ to 1000: _most populous_).
 
 ## Installation
 
@@ -22,20 +23,39 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+For quick US _County_ population estimates:
+    CensusFor::County.population("AnyCounty, AnyState")
 
-## Development
+Example:
+    CensusFor::County.population("Travis County, Texas")
+    CensusFor::County.population("fulton ga"
+    CensusFor::County.population("East Baton Rouge Parish, LA")
+    CensusFor::County.population("ponce municipio, pr")
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+will return census data. For the first above, eg.:
+    $ =>  1151145
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+For quick _State_ Census retrieval:
+    CensusFor::State.population("AnyState")
+
+Example:
+    CensusFor::County.population("GA")
+    CensusFor::County.population("new york"
+
+For your own US County metrics, I have also included a coefficient calculator to rank each US county by population, on a linear scale from least populous counties (coefficient of 1), to the most populous (coefficient of 1000).  The vast majority of results will fall in a range from 1-99.
+
+For quick _Coeff_ retrieval:
+    CensusFor::State.population("AnyState")
+
+Example:
+    CensusFor::County.coeff("Clarke County, GA")
+    CensusFor::County.population("clarke ga")
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/census_for.
+Bug reports and pull requests are welcome on GitHub at https://github.com/evo21/census_for.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
