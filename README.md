@@ -45,7 +45,7 @@ For quick _State_ Census retrieval:
 Example:
 
     CensusFor::County.population("GA")
-    CensusFor::County.population("new york"
+    CensusFor::County.population("new york")
 
 For your own US County metrics, I have also included a coefficient calculator to rank each US county by population, on a linear scale from least populous counties (coefficient of 1), to the most populous (coefficient of 1000).  The vast majority of results will fall in a range from 1-99.
 
