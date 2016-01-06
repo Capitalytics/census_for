@@ -48,7 +48,7 @@ class CensusFor
     end
 
     def self.parse_county_state(county_state)
-      transit = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"]
+      transit = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"] - ["municipio"] - ["municipality"]
       if transit.size >= 3
         result = []
         1.upto(transit.size) do |x|
@@ -68,8 +68,9 @@ class CensusFor
         county_name = cs.first
         state_name = cs.last
         state = Abbrev.converter(state_name)
+        binding.pry
         result = CensusData.data.find { |x| x[:"geo.display_label"] == 
-            "#{county_name.split.map(&:capitalize).join(' ')} County, #{state}" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Parish, Louisiana" }
+            "#{county_name.split.map(&:capitalize).join(' ')} County, #{state}" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Parish, Louisiana" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Municipio, Puerto Rico" }
         if result
           return result[:respop72014]
         end
@@ -114,8 +115,8 @@ class CensusFor
     def self.converter(abbrev)
       if STATES.has_value?(abbrev.downcase)
         return abbrev.split.map(&:capitalize).join(' ')
-      elsif STATES.has_key?(abbrev.to_sym)
-        return STATES[abbrev.to_sym].capitalize
+      elsif STATES.has_key?(abbrev.downcase.to_sym)
+        return STATES[abbrev.downcase.to_sym].split.map(&:capitalize).join(' ')
       else return "not found"
       end
     end

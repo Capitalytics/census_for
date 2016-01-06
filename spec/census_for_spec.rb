@@ -46,14 +46,11 @@ context "CensusFor" do
       it "returns 'Not Found' with non-county request" do
         expect(CensusFor::County.population("Awesome County, TX")).to eq "not found"
       end
-      
-      #modified census data to add PR "state" = territory, but no county info
-      pending "need dataset and code additions for municipalities in PR" do
-        it "calculates correctly, given municipalities in Puerto Rico" do
-          expect(CensusFor::County.population("Ponce, PR")).to eq 166327
-          expect(CensusFor::County.population("Ponce Municipio, PR")).to eq 166327
-          expect(CensusFor::County.population("ponce municipality, puerto rico")).to eq 166327
-        end
+      it "calculates correctly, given municipalities in Puerto Rico" do
+        expect(CensusFor::County.population("Ponce, PR")).to eq 153540
+        expect(CensusFor::County.population("Ponce Municipio, PR")).to eq 153540
+        expect(CensusFor::County.population("ponce municipality, puerto rico")).to eq 153540
+        expect(CensusFor::County.population("San Sebastian Municipio, PR")).to eq 39969
       end
     end
   end
@@ -63,6 +60,11 @@ context "CensusFor" do
       it "calculates correctly, given full state name" do
         expect(CensusFor::State.population("Wyoming")).to eq 584153
         expect(CensusFor::State.population("North Dakota")).to eq 739482
+      end
+      it "calculates correctly, given state abbrev" do
+        expect(CensusFor::State.population("WY")).to eq 584153
+        expect(CensusFor::State.population("nd")).to eq 739482
+        expect(CensusFor::State.population("PR")).to eq 3548397
       end
       it "calculates correctly, given 'Puerto Rico'" do
         expect(CensusFor::State.population("Puerto Rico")).to eq 3548397
@@ -77,7 +79,7 @@ context "CensusFor" do
   end
 
   describe CensusFor::County do
-    describe "coeff" do
+    describe "Coeff" do
       #least populous US county has coefficient of 1.0; most populous county has 100.0
       it "calculates population coefficient, given county name" do
         expect(CensusFor::County.coeff("Los Angeles County, CA")).to eq 1000
