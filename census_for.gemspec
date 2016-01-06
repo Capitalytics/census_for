@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["evankoch@gmail.com"]
 
   spec.summary       = %q{Quickly retrieve US census data for counties/states.}
-  spec.description   = %q{Quickly retrieve US census data for counties/states.}
+  spec.description   = %q{Gem returns population data for US States, Counties, and a linear ranking/weight coefficient of US counties by population.}
   spec.homepage      = "https://github.com/evo21/census_for"
   spec.license       = "MIT"
 
@@ -20,9 +20,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency "smarter_csv", "~> 1.1"
+
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "pry", '~> 0'
-  spec.add_development_dependency "smarter_csv", '~> 1.1'
+  spec.add_development_dependency "spec_helper", "~> 0"
+  spec.add_development_dependency "pry", "~> 0"
 end

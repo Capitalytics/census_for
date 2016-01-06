@@ -1,3 +1,5 @@
+require 'smarter_csv'
+
 class CensusFor
 
   VERSION = "0.1.0"
@@ -106,7 +108,7 @@ class CensusFor
           counties_pop_total += c[:respop72014]
         end
         return counties_pop_total
-      else 'not found'
+      else  'not found'
       end
     end
   end
