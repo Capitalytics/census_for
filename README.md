@@ -24,37 +24,43 @@ Or install it yourself as:
 ## Usage
 
 For quick US _County_ population estimates:
-    CensusFor::County.population("AnyCounty, AnyState")
+
+    $ CensusFor::County.population("AnyCounty, AnyState")
 
 Example:
+
     CensusFor::County.population("Travis County, Texas")
     CensusFor::County.population("fulton ga"
     CensusFor::County.population("East Baton Rouge Parish, LA")
     CensusFor::County.population("ponce municipio, pr")
 
-will return census data. For the first above, eg.:
+For the first above example, "Travis County, Texas", returns:
+
     $ =>  1151145
 
 For quick _State_ Census retrieval:
+
     CensusFor::State.population("AnyState")
 
 Example:
+
     CensusFor::County.population("GA")
     CensusFor::County.population("new york"
 
 For your own US County metrics, I have also included a coefficient calculator to rank each US county by population, on a linear scale from least populous counties (coefficient of 1), to the most populous (coefficient of 1000).  The vast majority of results will fall in a range from 1-99.
 
 For quick _Coeff_ retrieval:
+
     CensusFor::State.population("AnyState")
 
 Example:
+
     CensusFor::County.coeff("Clarke County, GA")
     CensusFor::County.population("clarke ga")
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/evo21/census_for.
-
 
 ## License
 
