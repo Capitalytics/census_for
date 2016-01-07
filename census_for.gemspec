@@ -1,10 +1,12 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
+data = File.expand_path('../data', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$LOAD_PATH.unshift(data) unless $LOAD_PATH.include?(data)
 
 Gem::Specification.new do |spec|
   spec.name          = "census_for"
-  spec.version       = '0.1.0'
+  spec.version       = '0.1.1'
   spec.authors       = ["Evan Koch"]
   spec.email         = ["evankoch@gmail.com"]
 
@@ -18,13 +20,12 @@ Gem::Specification.new do |spec|
                        ]
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ["lib", "data"]
 
   spec.add_runtime_dependency "smarter_csv", "~> 1.1"
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "spec_helper", "~> 0"
   spec.add_development_dependency "pry", "~> 0"
 end
