@@ -37,7 +37,7 @@ class CensusFor
     end
 
     def self.load_data
-      SmarterCSV.process("data/2014-census-data.csv")
+      SmarterCSV.process("File.dirname(__FILE__)"+"/../data/2014-census-data.csv")
     end
   end
 
