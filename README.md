@@ -1,5 +1,5 @@
 # CensusFor 
-v. 1.0
+v. 0.1.2
 
 *CensusFor* lets you quickly return **2014** US Census data for _States_ and _Counties_, including Puerto Rico municipios.
 
