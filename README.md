@@ -38,6 +38,22 @@ For the first above example, "Travis County, Texas", returns:
 
     $ =>  1151145
 
+**County .population method uses the following to _parse_city_state_ submissions:**
+
+    $ CensusFor::County.parse_county_state("AnyCounty, AnyState")
+
+Example:
+
+    CensusFor::County.parse_county_state("Baldwin, AL")
+    CensusFor::County.parse_county_state("ponce pr")
+    CensusFor::County.parse_county_state("lafourche, LA")
+
+For these examples, returns:
+
+    $ =>  "Baldwin County, Alabama"
+    $ =>  "Ponce Municipio, Puerto Rico"
+    $ =>  "Lafourche Parish, LA"
+
 **For quick _State_ Census retrieval:**
 
     CensusFor::State.population("AnyState")

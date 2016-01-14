@@ -16,7 +16,7 @@ end
 
 context "CensusFor" do
   describe CensusFor::County do
-    describe "population" do
+    describe "#population" do
       it "calculates correctly given county, full state name" do
         expect(CensusFor::County.population("Baldwin, Alabama")).to eq 200111
         expect(CensusFor::County.population("Travis, Texas")).to eq 1151145
@@ -62,7 +62,18 @@ context "CensusFor" do
       end
     end
 
-    describe "Coeff" do
+    describe "#parse_county_state" do
+      it "parses submitted county and state format(s) to return string key data matching US-Census datafile" do
+        expect(CensusFor::County.parse_county_state("Baldwin, Alabama")).to eq "Baldwin County, Alabama"
+        expect(CensusFor::County.parse_county_state("east baton rouge, la")).to eq "East Baton Rouge Parish, Louisiana"
+        expect(CensusFor::County.parse_county_state("Ponce, PR")).to eq "Ponce Municipio, Puerto Rico"
+        expect(CensusFor::County.parse_county_state("Blue Uuuurth MN")).to eq "not found"
+        expect(CensusFor::County.parse_county_state("new york, ny")).to eq "New York County, New York"
+      end
+    end
+
+    describe "#coeff" do
+      binding.pry
       #least populous US county has coefficient of 1.0; most populous county has 100.0
       it "calculates population coefficient, given county name" do
         expect(CensusFor::County.coeff("Los Angeles County, CA")).to eq 1000
@@ -75,7 +86,7 @@ context "CensusFor" do
   end
 
   describe CensusFor::State do
-    describe "population" do
+    describe "#population" do
       it "calculates correctly, given full state name" do
         expect(CensusFor::State.population("Wyoming")).to eq 584153
         expect(CensusFor::State.population("North Dakota")).to eq 739482
@@ -121,4 +132,3 @@ context "CensusFor" do
     end
   end
 end
-

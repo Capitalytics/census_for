@@ -57,31 +57,35 @@ class CensusFor
     def self.parse_county_state(county_state)
       transit = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"] - ["municipio"] - ["municipality"]
       if transit.size >= 3
-        result = []
+        city_state_key_array = []
         1.upto((transit.size - 1)) do |x|
           y = transit.size
           first = transit.take(x).join(' ')
           second = transit.last(y-x).join(' ')
-          result << [first, second].flatten
+          city_state_key_array << [first, second].flatten
         end
-        return result
       else
-        return [transit]
+        city_state_key_array = [transit]
       end
-    end
-
-    def self.population_lookup(county_state)
-      county_state.each do |cs|
+      city_state_key_array.each do |cs|
         county_name = cs.first
         state_name = cs.last
         state = Abbrev.converter(state_name)
         result = CensusData.data.find { |x| x[:"geo.display_label"] == 
             "#{county_name.split.map(&:capitalize).join(' ')} County, #{state}" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Parish, Louisiana" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Municipio, Puerto Rico" }
         if result
-          return result[:respop72014]
+          return result[:"geo.display_label"]
         end
       end
-      return "not found" #preceding each loop matched nothing from query 
+      return "not found"
+    end
+
+    def self.population_lookup(parsed_county_state)
+      if parsed_county_state == "not found"
+        return "not found"
+      else
+        return CensusData.data.find { |x| x[:"geo.display_label"] == parsed_county_state }[:respop72014]
+      end
     end
 
     def self.coeff(county_state)
@@ -115,7 +119,8 @@ class CensusFor
           counties_pop_total += c[:respop72014]
         end
         return counties_pop_total
-      else  'not found'
+      else
+        return 'not found'
       end
     end
   end
