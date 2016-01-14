@@ -28,13 +28,14 @@ class CensusFor
      pw: "palau",
      ri: "rhode island",
      sc: "south carolina", sd: "south dakota", tn: "tennessee", tx: "texas",
-     um: "us minor outlying islands",
+     um: "u.s. minor outlying islands",
      ut: "utah",
      va: "virginia", vt: "vermont",
      vi: "virgin islands",
      wa: "washington", wi: "wisconsin", wv: "west virginia", wy: "wyoming",
      ae: "ae",
      aa: "ae",
+     ap: "ae"
     }
 
   class CensusData
