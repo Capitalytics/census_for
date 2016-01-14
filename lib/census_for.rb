@@ -19,16 +19,23 @@ class CensusFor
      ks: "kansas", ky: "kentucky",
      la: "louisiana",
      ma: "massachusetts", md: "maryland", me: "maine", mi: "michigan", mn: "minnesota", mo: "missouri", ms: "mississippi", mt: "montana",
+     mh: "marshall islands",
+     mp: "mariana islands",
      nc: "north carolina", nd: "north dakota", ne: "nebraska", nh: "new hampshire", nj: "new jersey", nm: "new mexico", nv: "nevada", ny: "new york",
      oh: "ohio", ok: "oklahoma", or: "oregon",
      pa: "pennsylvania",
      pr: "puerto rico",
+     pw: "palau",
      ri: "rhode island",
      sc: "south carolina", sd: "south dakota", tn: "tennessee", tx: "texas",
+     um: "u.s. minor outlying islands",
      ut: "utah",
      va: "virginia", vt: "vermont",
      vi: "virgin islands",
-     wa: "washingington", wi: "wisconsin", wv: "west virginia", wy: "wyoming"
+     wa: "washington", wi: "wisconsin", wv: "west virginia", wy: "wyoming",
+     ae: "ae",
+     aa: "ae",
+     ap: "ae"
     }
 
   class CensusData
