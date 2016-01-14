@@ -20,6 +20,7 @@ context "CensusFor" do
       it "calculates correctly given county, full state name" do
         expect(CensusFor::County.population("Baldwin, Alabama")).to eq 200111
         expect(CensusFor::County.population("Travis, Texas")).to eq 1151145
+        expect(CensusFor::County.population("King, Washington")).to eq 2079967
       end
       it "calculates correctly given counties/states with > 1 name" do
         expect(CensusFor::County.population("Blue Earth, MN")).to eq 65385
@@ -27,6 +28,7 @@ context "CensusFor" do
         expect(CensusFor::County.population("Blue Uuuurrth, MN")).to eq "not found"
         expect(CensusFor::County.population("East Baton Rouge Parish, LA")).to eq 446042
         expect(CensusFor::County.population("New York County, New York")).to eq 1636268
+        expect(CensusFor::County.population("new York new york")).to eq 1636268
       end
       it "calculates correctly given parish, for Louisiana" do
         expect(CensusFor::County.population("tangipahoa Parish, Louisiana")).to eq 127049
@@ -34,6 +36,8 @@ context "CensusFor" do
       it "calculates correctly given county, state abbreviation" do
         expect(CensusFor::County.population("Baldwin, al")).to eq 200111
         expect(CensusFor::County.population("Tangipahoa, LA")).to eq 127049
+        expect(CensusFor::County.population("king wa")).to eq 2079967
+
       end
       it "calculates correctly when 'county'/'parish' included in county name" do
         expect(CensusFor::County.population("baldwin county AL")).to eq 200111
@@ -51,6 +55,10 @@ context "CensusFor" do
         expect(CensusFor::County.population("Ponce Municipio, PR")).to eq 153540
         expect(CensusFor::County.population("ponce municipality, puerto rico")).to eq 153540
         expect(CensusFor::County.population("San Sebastian Municipio, PR")).to eq 39969
+      end
+      it "calculates correctly, given 'District of Columbia'" do
+        expect(CensusFor::County.population("District of Columbia, District of Columbia")).to eq 658893
+        expect(CensusFor::County.population("District of Columbia, DC")).to eq 658893
       end
     end
 
@@ -87,6 +95,28 @@ context "CensusFor" do
         expect(CensusFor::State.population("north dakota")).to eq 739482
         expect(CensusFor::State.population("puerto Rico")).to eq 3548397
         expect(CensusFor::State.population("NORTH DAKOTA")).to eq 739482
+      end
+      it "calculates correctly, given special postal/county codes" do
+        expect(CensusFor::State.population("AS")).to eq 55165
+        expect(CensusFor::State.population("DC")).to eq 658893
+        expect(CensusFor::State.population("GU")).to eq 165124
+        expect(CensusFor::State.population("MH")).to eq 52634
+        expect(CensusFor::State.population("MP")).to eq 53855
+        expect(CensusFor::State.population("pw")).to eq 20918
+        expect(CensusFor::State.population("vi")).to eq 104737
+        expect(CensusFor::State.population("ae")).to eq 1318428
+        expect(CensusFor::State.population("aa")).to eq 1318428
+        expect(CensusFor::State.population("ap")).to eq 1318428
+        expect(CensusFor::State.population("um")).to eq 300
+      end
+      it "calculates correctly, given other US territories" do
+        expect(CensusFor::State.population("AS")).to eq 55165
+        
+        expect(CensusFor::State.population("district of columbia")).to eq 658893
+        expect(CensusFor::State.population("u.s. minor outlying islands")).to eq 300
+        expect(CensusFor::State.population("mariana islands")).to eq 53855
+        expect(CensusFor::State.population("Marshall islands")).to eq 52634
+
       end
     end
   end
