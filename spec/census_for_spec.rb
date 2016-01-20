@@ -18,8 +18,8 @@ context "CensusFor" do
   describe CensusFor::County do
     describe "#population" do
       it "calculates correctly given county, full state name" do
-        expect(CensusFor::County.population("Baldwin, Alabama")).to eq 200111
-        expect(CensusFor::County.population("Travis, Texas")).to eq 1151145
+        expect(CensusFor::County.population("Cameron, Texas")).to eq 420392
+        expect(CensusFor::County.population("Cameron, Louisiana")).to eq 6679
         expect(CensusFor::County.population("King, Washington")).to eq 2079967
       end
       it "calculates correctly given counties/states with > 1 name" do
@@ -29,9 +29,6 @@ context "CensusFor" do
         expect(CensusFor::County.population("East Baton Rouge Parish, LA")).to eq 446042
         expect(CensusFor::County.population("New York County, New York")).to eq 1636268
         expect(CensusFor::County.population("new York new york")).to eq 1636268
-      end
-      it "calculates correctly given parish, for Louisiana" do
-        expect(CensusFor::County.population("tangipahoa Parish, Louisiana")).to eq 127049
       end
       it "calculates correctly given county, state abbreviation" do
         expect(CensusFor::County.population("Baldwin, al")).to eq 200111
@@ -50,11 +47,21 @@ context "CensusFor" do
       it "returns 'Not Found' with non-county request" do
         expect(CensusFor::County.population("Awesome County, TX")).to eq "not found"
       end
-      it "calculates correctly, given municipalities in Puerto Rico" do
+      it "calculates correctly, given alternate county identifiers" do
         expect(CensusFor::County.population("Ponce, PR")).to eq 153540
         expect(CensusFor::County.population("Ponce Municipio, PR")).to eq 153540
         expect(CensusFor::County.population("ponce municipality, puerto rico")).to eq 153540
-        expect(CensusFor::County.population("San Sebastian Municipio, PR")).to eq 39969
+        expect(CensusFor::County.population("Hoonah-Angoon Census Area, AK")).to eq 2082
+        expect(CensusFor::County.population("Prince of Wales-Hyder Census Area, AK")).to eq 6396
+        expect(CensusFor::County.population("Prince of Wales-Hyder, Alaska")).to eq 6396
+        expect(CensusFor::County.population("Denali Borough, AK")).to eq 1921
+        expect(CensusFor::County.population("Juneau City and Borough, AK")).to eq 32406
+        expect(CensusFor::County.population("Juneau Alaska")).to eq 32406
+        expect(CensusFor::County.population("Miami-Dade, FL")).to eq 2662874
+        expect(CensusFor::County.population("James City, VA")).to eq 72583
+        expect(CensusFor::County.population("James City County, Virginia")).to eq 72583
+
+
       end
       it "calculates correctly, given 'District of Columbia'" do
         expect(CensusFor::County.population("District of Columbia, District of Columbia")).to eq 658893
@@ -64,23 +71,11 @@ context "CensusFor" do
 
     describe "#parse_county_state" do
       it "parses submitted county and state format(s) to return string key data matching US-Census datafile" do
-        expect(CensusFor::County.parse_county_state("Baldwin, Alabama")).to eq "Baldwin County, Alabama"
+        expect(CensusFor::County.new("Baldwin, Alabama").parse_county_state).to eq "Baldwin County, Alabama"
         expect(CensusFor::County.parse_county_state("east baton rouge, la")).to eq "East Baton Rouge Parish, Louisiana"
         expect(CensusFor::County.parse_county_state("Ponce, PR")).to eq "Ponce Municipio, Puerto Rico"
         expect(CensusFor::County.parse_county_state("Blue Uuuurth MN")).to eq "not found"
         expect(CensusFor::County.parse_county_state("new york, ny")).to eq "New York County, New York"
-      end
-    end
-
-    describe "#coeff" do
-      binding.pry
-      #least populous US county has coefficient of 1.0; most populous county has 100.0
-      it "calculates population coefficient, given county name" do
-        expect(CensusFor::County.coeff("Los Angeles County, CA")).to eq 1000
-        expect(CensusFor::County.coeff("Loving County, TX")).to eq 1
-        expect(CensusFor::County.coeff("East Baton Rouge Parish, Louisiana")).to eq 44
-        expect(CensusFor::County.coeff("Fulton, Georgia")).to eq 98
-        expect(CensusFor::County.coeff("Clarke, GA")).to eq 11
       end
     end
   end
@@ -127,7 +122,6 @@ context "CensusFor" do
         expect(CensusFor::State.population("u.s. minor outlying islands")).to eq 300
         expect(CensusFor::State.population("mariana islands")).to eq 53855
         expect(CensusFor::State.population("Marshall islands")).to eq 52634
-
       end
     end
   end
