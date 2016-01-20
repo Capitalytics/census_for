@@ -4,12 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "census_for"
-  spec.version       = '0.1.4'
+  spec.version       = '0.1.5'
   spec.authors       = ["Evan Koch"]
   spec.email         = ["evankoch@gmail.com"]
 
   spec.summary       = %q{Quickly retrieve US census data for counties/states.}
-  spec.description   = %q{Gem returns population data for US States, Counties, and a linear ranking/weight coefficient of US counties by population.}
+  spec.description   = %q{Gem returns population data for US States, Counties, including Puerto Rico, US territories.}
   spec.homepage      = "https://github.com/evo21/census_for"
   spec.license       = "MIT"
 
