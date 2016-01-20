@@ -2,7 +2,7 @@ require 'smarter_csv'
 
 class CensusFor
 
-  VERSION = "0.1.3"
+  VERSION = "0.1.4"
 
   STATES =
     {
@@ -49,35 +49,61 @@ class CensusFor
   end
 
   class County
+
     def self.population(request)
-      parsed_request = parse_county_state(request)
-      return population_lookup(parsed_request)
+      self.new(request).population
     end
 
-    def self.parse_county_state(county_state)
-      transit = county_state.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"] - ["municipio"] - ["municipality"]
-      if transit.size >= 3
-        city_state_key_array = []
-        1.upto((transit.size - 1)) do |x|
-          y = transit.size
-          first = transit.take(x).join(' ')
-          second = transit.last(y-x).join(' ')
-          city_state_key_array << [first, second].flatten
-        end
-      else
-        city_state_key_array = [transit]
+    def self.parse_county_state(request)
+      self.new(request).parse_county_state
+    end
+
+    def initialize(request)
+      @request = request
+      @request_array = request_to_array_minus_countystring
+      match_state_and_county
+    end
+
+
+    def match_state_and_county
+      if @state = Abbrev.converter(@request_array.last)
+        @county = @request_array[0...-1].join(' ')
+      elsif @state = Abbrev.converter(@request_array.last(2).join(' '))
+        @county = @request_array[0...-2].join(' ')
+      elsif @state = Abbrev.converter(@request_array.last(3).join(' '))
+        @county = @request_array[0...-3].join(' ')
       end
-      city_state_key_array.each do |cs|
-        county_name = cs.first
-        state_name = cs.last
-        state = Abbrev.converter(state_name)
-        result = CensusData.data.find { |x| x[:"geo.display_label"] == 
-            "#{county_name.split.map(&:capitalize).join(' ')} County, #{state}" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Parish, Louisiana" || x[:"geo.display_label"] == "#{county_name.split.map(&:capitalize).join(' ')} Municipio, Puerto Rico" }
-        if result
-          return result[:"geo.display_label"]
-        end
+      @county = titleize(@county)
+    end
+
+    def population
+      parsed_request = parse_county_state
+      return County.population_lookup(parsed_request)
+    end
+
+    def parse_county_state
+      result = CensusData.data.find do |x|
+        x[:"geo.display_label"] == "#{@county} County, #{@state}" ||
+        x[:"geo.display_label"] == "#{@county} Parish, #{@state}" ||
+        x[:"geo.display_label"] == "#{@county} Municipio, #{@state}" ||
+        x[:"geo.display_label"] == "#{@county} Municipality, #{@state}" ||
+        x[:"geo.display_label"] == "#{@county} Borough, #{@state}" ||
+        x[:"geo.display_label"] == "#{@county} Census Area, #{@state}" ||
+        x[:"geo.display_label"] == "#{@county} City County, #{@state}" ||
+        x[:"geo.display_label"] == "#{@county} City and Borough, #{@state}"
+      end
+      if result
+        return result[:"geo.display_label"]
       end
       return "not found"
+    end
+
+    def titleize(string)
+      string.split.map(&:capitalize).join(' ')
+    end
+
+    def request_to_array_minus_countystring
+      @request.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"] - ["municipio"] - ["municipality"] - ["census"] - ["area"] - ["city"] - ["and"]
     end
 
     def self.population_lookup(parsed_county_state)
@@ -86,17 +112,6 @@ class CensusFor
       else
         return CensusData.data.find { |x| x[:"geo.display_label"] == parsed_county_state }[:respop72014]
       end
-    end
-
-    def self.coeff(county_state)
-      coefficient = (population(county_state) * 1000 / highest_county_pop).to_f
-      coefficient < 1 ? 1 : coefficient
-    end
-
-    def self.highest_county_pop
-      most_populous_county = CensusData.data.max_by { |x| x[:respop72014] }
-      most_populous_county[:respop72014]
-        #for 2014, this is Los Angeles County, CA: pop 10,116,705
     end
   end
 
