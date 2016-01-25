@@ -2,7 +2,7 @@ require 'smarter_csv'
 
 class CensusFor
 
-  VERSION = "0.1.5"
+  VERSION = "1.1"
 
   STATES =
     {
@@ -37,6 +37,11 @@ class CensusFor
      aa: "ae",
      ap: "ae"
     }
+
+  SWAPOUTS = {
+    "saint" => "st.",
+    "st" => "st."
+  }
 
   class CensusData
     def self.data
@@ -99,11 +104,13 @@ class CensusFor
     end
 
     def titleize(string)
-      string.split.map(&:capitalize).join(' ')
+      string.to_s.split.map(&:capitalize).join(' ')
     end
 
     def request_to_array_minus_countystring
-      @request.downcase.split(/[\s,]+/) - ["county"] - ["parish"] - ["borough"] - ["municipio"] - ["municipality"] - ["census"] - ["area"] - ["city"] - ["and"]
+      initial_array = @request.to_s.downcase.split(/[\s,]+/)
+      initial_array[0] = SWAPOUTS[initial_array[0]] if SWAPOUTS[initial_array[0]]
+      initial_array - ["county"] - ["parish"] - ["borough"] - ["municipio"] - ["municipality"] - ["census"] - ["area"] - ["city"] - ["and"]
     end
 
     def self.population_lookup(parsed_county_state)
@@ -142,9 +149,9 @@ class CensusFor
 
   class Abbrev
     def self.converter(abbrev)
-      if STATES.has_value?(abbrev.downcase)
+      if STATES.has_value?(abbrev.to_s.downcase)
         return abbrev.split.map(&:capitalize).join(' ')
-      elsif STATES.has_key?(abbrev.downcase.to_sym)
+      elsif STATES.has_key?(abbrev.to_s.downcase.to_sym)
         return STATES[abbrev.downcase.to_sym].split.map(&:capitalize).join(' ')
       else return nil
       end

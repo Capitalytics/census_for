@@ -1,9 +1,7 @@
 # CensusFor 
-v. 0.1.4
+v. 1.1
 
 *CensusFor* lets you quickly return **2014** US Census data for _States_ and _Counties_, including Puerto Rico municipios.
-
-(I believe gem provides 100% response coverage for US counties, parishes, boroughs, etc.)
 
 ## Installation
 

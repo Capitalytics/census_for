@@ -48,31 +48,40 @@ context "CensusFor" do
         expect(CensusFor::County.population("Awesome County, TX")).to eq "not found"
       end
       it "calculates correctly, given alternate county identifiers" do
-        expect(CensusFor::County.population("Ponce, PR")).to eq 153540
         expect(CensusFor::County.population("Ponce Municipio, PR")).to eq 153540
         expect(CensusFor::County.population("ponce municipality, puerto rico")).to eq 153540
         expect(CensusFor::County.population("Hoonah-Angoon Census Area, AK")).to eq 2082
         expect(CensusFor::County.population("Prince of Wales-Hyder Census Area, AK")).to eq 6396
-        expect(CensusFor::County.population("Prince of Wales-Hyder, Alaska")).to eq 6396
+        expect(CensusFor::County.population("Matanuska-Susitna Borough, Alaska")).to eq 97882
         expect(CensusFor::County.population("Denali Borough, AK")).to eq 1921
         expect(CensusFor::County.population("Juneau City and Borough, AK")).to eq 32406
         expect(CensusFor::County.population("Juneau Alaska")).to eq 32406
         expect(CensusFor::County.population("Miami-Dade, FL")).to eq 2662874
         expect(CensusFor::County.population("James City, VA")).to eq 72583
         expect(CensusFor::County.population("James City County, Virginia")).to eq 72583
-
-
+        expect(CensusFor::County.population("Saint Tammany Parish, LA")).to eq 245829
+        expect(CensusFor::County.population("St. Tammany Parish, LA")).to eq 245829
+        expect(CensusFor::County.population("St Tammany Parish, LA")).to eq 245829
+        expect(CensusFor::County.population("St Mary's, MD")).to eq 110382
+        expect(CensusFor::County.population("st louis city county mo")).to eq 1001876
+        expect(CensusFor::County.population("saint john the baptist parish louisiana")).to eq 43745
+        expect(CensusFor::County.population("Fond du Lac, WI")).to eq 101759
+        expect(CensusFor::County.population("lewis and clark, montana")).to eq 65856
+        expect(CensusFor::County.population("lake and peninsula borough, ak")).to eq 1631
       end
       it "calculates correctly, given 'District of Columbia'" do
         expect(CensusFor::County.population("District of Columbia, District of Columbia")).to eq 658893
         expect(CensusFor::County.population("District of Columbia, DC")).to eq 658893
+      end
+      it "returns 'not found', given nil request arg" do
+        expect(CensusFor::County.population(nil)).to eq 'not found'
       end
     end
 
     describe "#parse_county_state" do
       it "parses submitted county and state format(s) to return string key data matching US-Census datafile" do
         expect(CensusFor::County.new("Baldwin, Alabama").parse_county_state).to eq "Baldwin County, Alabama"
-        expect(CensusFor::County.parse_county_state("east baton rouge, la")).to eq "East Baton Rouge Parish, Louisiana"
+        expect(CensusFor::County.parse_county_state("juneau alaska")).to eq "Juneau City and Borough, Alaska"
         expect(CensusFor::County.parse_county_state("Ponce, PR")).to eq "Ponce Municipio, Puerto Rico"
         expect(CensusFor::County.parse_county_state("Blue Uuuurth MN")).to eq "not found"
         expect(CensusFor::County.parse_county_state("new york, ny")).to eq "New York County, New York"
