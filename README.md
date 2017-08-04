@@ -1,7 +1,7 @@
 # CensusFor 
 v. 1.1
 
-*CensusFor* lets you quickly return **2014** US Census data for _States_ and _Counties_, including Puerto Rico municipios.
+*CensusFor* lets you quickly return **2014** US Census data for _States_ and _Counties_, including Puerto Rico municipios. Returns correctly styled USA county text, ie. "juneau ak" ==> "Juneau City and Borough, Alaska"
 
 ## Installation
 
@@ -60,8 +60,8 @@ For these examples, returns:
 
 Example:
 
-    CensusFor::County.population("GA")
-    CensusFor::County.population("new york")
+    CensusFor::State.population("GA")
+    CensusFor::State.population("new york")
 
 ## Contributing
 
