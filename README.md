@@ -51,7 +51,7 @@ For these examples, returns:
 
     $ =>  "Baldwin County, Alabama"
     $ =>  "Ponce Municipio, Puerto Rico"
-    $ =>  "Lafourche Parish, LA"
+    $ =>  "Lafourche Parish, Louisiana"
     $ =>  "Juneau City and Borough, Alaska"
 
 **For quick _State_ Census retrieval:**
